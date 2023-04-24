@@ -11,19 +11,14 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserFactory {
     private static ChromeDriver getChromeInstance(){
-        WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
-        chromeOptions.addArguments(ConfigManager.getStringValueOf("chromeWindowSize"));
         WebDriverManager.chromedriver().setup();
         return new ChromeDriver(chromeOptions);
     }
     private static FirefoxDriver getFirefoxInstance(){
         WebDriverManager.firefoxdriver().setup();
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments(ConfigManager.getStringValueOf("firefoxWindowHeight"),
-                ConfigManager.getStringValueOf("firefoxWindowWidth"));
-        return new FirefoxDriver(firefoxOptions);
+        return new FirefoxDriver();
     }
     protected static WebDriver getBrowser(String browserName){
         switch (browserName){
