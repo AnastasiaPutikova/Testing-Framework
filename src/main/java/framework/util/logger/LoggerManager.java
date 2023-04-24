@@ -8,7 +8,7 @@ public class LoggerManager {
     static Logger logger;
 
     static {
-        try (FileInputStream ins = new FileInputStream("src/main/java/framework/util/logger/log.config")) {
+        try (FileInputStream ins = new FileInputStream("src/main/resources/log.config")) {
             LogManager.getLogManager().readConfiguration(ins);
             logger = Logger.getLogger(LoggerManager.class.getName());
         } catch (Exception e) {

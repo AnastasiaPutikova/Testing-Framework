@@ -13,7 +13,9 @@ public class BrowserFactory {
     private static ChromeDriver getChromeInstance(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.addArguments(ConfigManager.getStringValueOf("chromeWindowSize"));
+        WebDriverManager.chromedriver().setup();
         return new ChromeDriver(chromeOptions);
     }
     private static FirefoxDriver getFirefoxInstance(){

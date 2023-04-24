@@ -12,7 +12,7 @@ public class ConfigManager {
     private static Properties properties;
 
     static {
-        String propertyFilePath = "src/main/java/framework/util/config/config.properties";
+        String propertyFilePath = "src/main/resources/config.properties";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(propertyFilePath));
             properties = new Properties();
