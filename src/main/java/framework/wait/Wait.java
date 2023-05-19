@@ -16,7 +16,7 @@ public class Wait {
         return new WebDriverWait(BrowserManager.getDriver(),
                 Duration.ofSeconds(ConfigManager.getIntValueOf("explicitWait")));
     }
-    public static boolean isElementDisplayedAfterWait(By locator) {
+    public static boolean isElementDisplayed(By locator) {
         try {
             getWait().until(ExpectedConditions.presenceOfElementLocated(locator)).isDisplayed();
             return true;

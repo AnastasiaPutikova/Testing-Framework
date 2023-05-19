@@ -12,12 +12,12 @@ public class BaseElement {
     private final By locator;
     private final String name;
 
-    protected BaseElement(By locator, String name){
+    public BaseElement(By locator, String name){
         this.locator = locator;
         this.name = name;
     }
 
-    protected WebElement findElement(){
+    public WebElement findElement(){
         Wait.waitUntilPresenceOfElement(locator);
         try{
             return BrowserManager.getDriver().findElement(locator);
@@ -26,15 +26,34 @@ public class BaseElement {
             return null;
         }
     }
-    protected void click(){
+    public void click(){
         LoggerManager.logInfo(String.format("Click on %s", name));
         Wait.waitUntilElementToBeClickable(locator);
         findElement().click();
     }
-    protected String  getText(){
+    public void type(String text){
+        LoggerManager.logInfo(String.format("Type in %s", name));
+        Wait.isElementDisplayed(locator);
+        findElement().sendKeys(text);
+    }
+    public void clear(){
+        LoggerManager.logInfo(String.format("Clear %s", name));
+        Wait.isElementDisplayed(locator);
+        findElement().clear();
+    }
+    public String  getText(){
         return findElement().getText();
     }
-    protected boolean isElementDisappeared(){
+    public String  getAttribute(String attributeName){
+        return findElement().getAttribute(attributeName);
+    }
+    public String  getCssValue(String propertyName){
+        return findElement().getCssValue(propertyName);
+    }
+    public String  getTagName(){
+        return findElement().getTagName();
+    }
+    public boolean isElementDisappeared(){
         try {
             Wait.waitUntilElementIsDisappear(locator);
             return true;
@@ -43,7 +62,7 @@ public class BaseElement {
             return false;
         }
     }
-    protected boolean isElementPresence(){
+    public boolean isElementPresence(){
         try {
             Wait.waitUntilPresenceOfElement(locator);
             return true;
@@ -52,7 +71,7 @@ public class BaseElement {
             return false;
         }
     }
-    protected boolean isElementDisplayed(){
+    public boolean isElementDisplayed(){
         try {
             Wait.waitUntilInvisibilityOfElement(locator);
             return false;

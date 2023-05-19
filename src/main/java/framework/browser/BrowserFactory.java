@@ -1,13 +1,11 @@
 package framework.browser;
 
-import framework.util.config.ConfigManager;
 import framework.util.logger.LoggerManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserFactory {
     private static ChromeDriver getChromeInstance(){

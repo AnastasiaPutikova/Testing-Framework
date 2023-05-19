@@ -17,7 +17,7 @@ public class BasePage {
     public boolean isPageOpened(){
         LoggerManager.logInfo(String.format("%s is opened", name));
         try{
-            return Wait.isElementDisplayedAfterWait(uniqueElement);
+            return Wait.isElementDisplayed(uniqueElement);
         } catch (TimeoutException e){
             LoggerManager.logError(e.toString());
             return false;
