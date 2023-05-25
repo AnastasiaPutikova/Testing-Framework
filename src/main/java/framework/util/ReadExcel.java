@@ -23,13 +23,13 @@ public class ReadExcel {
     public int getColCount() {
         return sheet.getRow(0).getPhysicalNumberOfCells();
     }
-    public String getStringCellData(int row, int col) {
+    private String getStringCellData(int row, int col) {
         return sheet.getRow(row).getCell(col).getStringCellValue();
     }
-    public int getNumberCellData(int row, int col) {
+    private int getNumberCellData(int row, int col) {
         return (int) sheet.getRow(row).getCell(col).getNumericCellValue();
     }
-    public int getCellType(int row, int col){
+    private int getCellType(int row, int col){
         return sheet.getRow(row).getCell(col).getCellType();
     }
     public String getCellData(int row, int col){

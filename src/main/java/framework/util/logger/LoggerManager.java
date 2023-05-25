@@ -5,7 +5,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class LoggerManager {
-    static Logger logger;
+    private static Logger logger;
 
     static {
         try (FileInputStream ins = new FileInputStream("src/main/resources/log.config")) {
