@@ -8,6 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 
 public class BaseElement {
     private final By locator;
@@ -17,23 +18,38 @@ public class BaseElement {
         this.locator = locator;
         this.name = name;
     }
-
     public WebElement findElement(){
-        Wait.waitUntilPresenceOfElement(locator);
         try{
-            return BrowserManager.getDriver().findElement(locator);
+            WebElement element = BrowserManager.getDriver().findElement(locator);
+            new Actions(BrowserManager.getDriver())
+                    .scrollToElement(element)
+                    .perform();
+            return element;
         } catch (NoSuchElementException e){
             LoggerManager.logError("Unable to locate element " + name);
             return null;
         }
     }
+    public WebElement findElementByAmount(){
+        try{
+            WebElement clickable = BrowserManager.getDriver().findElement(locator);
+            new Actions(BrowserManager.getDriver())
+                    .click(clickable)
+                    .perform();
+            return clickable;
+        } catch (NoSuchElementException e){
+            LoggerManager.logError("Unable to locate element by amount" + name);
+            return null;
+        }
+    }
     public void click(){
         LoggerManager.logInfo(String.format("Click on %s", name));
-        WebElement element = findElement();
-        new Actions(BrowserManager.getDriver())
-                .scrollToElement(element)
-                .perform();
-        element.click();
+        Wait.waitUntilElementToBeClickable(locator);
+        findElement().click();
+    }
+    public void clickByAmount(){
+        LoggerManager.logInfo(String.format("Click on %s", name));
+        findElementByAmount().click();
     }
     public void type(String text){
         LoggerManager.logInfo(String.format("Type in %s", name));
