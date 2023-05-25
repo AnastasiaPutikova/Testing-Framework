@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class BaseElement {
     private final By locator;
@@ -28,8 +29,11 @@ public class BaseElement {
     }
     public void click(){
         LoggerManager.logInfo(String.format("Click on %s", name));
-        Wait.waitUntilElementToBeClickable(locator);
-        findElement().click();
+        WebElement element = findElement();
+        new Actions(BrowserManager.getDriver())
+                .scrollToElement(element)
+                .perform();
+        element.click();
     }
     public void type(String text){
         LoggerManager.logInfo(String.format("Type in %s", name));
